@@ -1,0 +1,78 @@
+{
+    "identifier": "com.kranial.laravel-lsp",
+    "name": "Laravel LSP",
+    "organization": "Kranial",
+    "description": "Blade syntax highlighting plus framework-aware Laravel language support, powered by the official laravel/lsp language server.",
+    "version": "1.0",
+    "license": "MIT",
+    "categories": ["languages", "completions"],
+
+    "main": "main.js",
+
+    "bugs": "https://github.com/aprivette/nova-laravel-lsp/issues",
+    "repository": "https://github.com/aprivette/nova-laravel-lsp",
+
+    "activationEvents": ["onLanguage:php", "onLanguage:blade"],
+
+    "entitlements": {
+        "process": true,
+        "filesystem": "readwrite"
+    },
+
+    "commands": {
+        "extensions": [
+            {
+                "title": "Restart Laravel LSP",
+                "command": "laravelLsp.restart"
+            }
+        ],
+        "command-palette": [
+            {
+                "title": "Restart Laravel LSP",
+                "command": "laravelLsp.restart"
+            }
+        ]
+    },
+
+    "config": [
+        {
+            "key": "laravelLsp.serverPath",
+            "title": "Server Path",
+            "description": "Path to the laravel-lsp executable. Leave blank to search Composer's global bin directory and your PATH.",
+            "type": "path",
+            "placeholder": "~/.composer/vendor/bin/laravel-lsp"
+        },
+        {
+            "key": "laravelLsp.debug",
+            "title": "Enable Debug Logging",
+            "description": "Log LSP traffic and server lifecycle events to the Extension Console. Requires a server restart.",
+            "type": "boolean",
+            "default": false
+        }
+    ],
+
+    "configWorkspace": [
+        {
+            "key": "laravelLsp.phpEnvironment",
+            "title": "PHP Environment",
+            "description": "How the server should locate the PHP binary it uses to index this project.",
+            "type": "enum",
+            "values": ["auto", "herd", "valet", "sail", "lando", "ddev", "local"],
+            "default": "auto"
+        },
+        {
+            "key": "laravelLsp.phpCommand",
+            "title": "PHP Command Override",
+            "description": "Explicit command used to run PHP, overriding PHP Environment. Space separated. Example: docker exec -i api_app php",
+            "type": "string",
+            "placeholder": "Detected from PHP Environment"
+        },
+        {
+            "key": "laravelLsp.serverPath",
+            "title": "Server Path",
+            "description": "Override the laravel-lsp executable for this workspace only.",
+            "type": "path",
+            "placeholder": "Use global setting"
+        }
+    ]
+}

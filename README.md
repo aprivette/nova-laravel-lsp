@@ -1,0 +1,1 @@
+LaravelLSP.novaextension/README.md

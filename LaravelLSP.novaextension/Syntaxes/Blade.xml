@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<syntax name="blade">
+    <meta>
+        <name>Blade</name>
+        <type>markup</type>
+        <preferred-file-extension>blade.php</preferred-file-extension>
+        <parent>html</parent>
+    </meta>
+
+    <!--
+        A compound extension. Nova scores this more specifically than the PHP
+        syntax's plain `php`, so `.blade.php` resolves here while `.php` still
+        opens as PHP.
+    -->
+    <detectors>
+        <extension priority="1.0">blade.php</extension>
+    </detectors>
+
+    <indentation>
+        <increase>
+            <!--
+                `section` and `php` are handled separately: @section('a', 'b')
+                and @php($x = 1) are self-closing and must not indent, while
+                @section('a') and a bare @php open a block.
+            -->
+            <expression>^\s*@(?:if|elseif|else|unless|isset|empty|switch|case|default|foreach|forelse|for|while|each|hasSection|sectionMissing|push|pushIf|prepend|once|fragment|verbatim|auth|guest|env|production|error|canany|cannot|can|slot)\b|^\s*@php(?!\s*\()|^\s*@section\s*\([^,]*\)\s*$|^\s*&lt;(([^!/?]|%)(?!.+?([/%]&gt;|&lt;/.+?&gt;))|[%!]--\s*$)</expression>
+        </increase>
+        <decrease>
+            <expression>^\s*@(?:end|else|elseif|empty|case|default|slot)|^\s*(&lt;/[^&gt;]+&gt;|--&gt;)</expression>
+        </decrease>
+    </indentation>
+
+    <comments>
+        <multiline>
+            <starts-with>
+                <expression>{{--</expression>
+            </starts-with>
+            <ends-with>
+                <expression>--}}</expression>
+            </ends-with>
+        </multiline>
+    </comments>
+
+    <brackets>
+        <pair open="{" close="}" />
+        <pair open="[" close="]" />
+        <pair open="(" close=")" />
+    </brackets>
+
+    <autoclosing-pairs>
+        <pair open="{" close="}" />
+        <pair open="[" close="]" />
+        <pair open="(" close=")" />
+        <pair open="&apos;" close="&apos;" notIn="string,comment" />
+        <pair open="&quot;" close="&quot;" notIn="string" />
+    </autoclosing-pairs>
+
+    <!-- Lets other syntaxes inject Blade by name. -->
+    <injection>
+        <expression>^(blade)$</expression>
+    </injection>
+
+    <tree-sitter language="blade">
+        <highlights />
+        <injections />
+        <folds />
+    </tree-sitter>
+</syntax>
