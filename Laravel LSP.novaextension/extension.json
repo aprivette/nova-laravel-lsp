@@ -1,7 +1,7 @@
 {
     "identifier": "kranial.laravel-lsp",
     "name": "Laravel LSP",
-    "organization": "kranial",
+    "organization": "Kranial",
     "description": "Blade syntax highlighting plus framework-aware Laravel language support, powered by the official laravel/lsp language server.",
     "version": "1.0",
     "license": "MIT",
